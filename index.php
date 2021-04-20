@@ -139,7 +139,7 @@ $latestDate  = strtotime(date('Y-m-d', strtotime($thisDate[0]))); // 取最新�
 $currentTimezone = substr($thisDate[0],-5,5);
 $totalHours = number_format(($totalSeconds / 3600),1);
 $averageMinutes = number_format(($totalSeconds / 60 / ($t-1)),1);
-$sinceLastUpdate = ceil((strtotime(now)-strtotime($thisDate[0]))/86400);
+$sinceLastUpdate = ceil((strtotime($now)-strtotime($thisDate[0]))/86400);
 if ($sinceLastUpdate <= 0) {$sinceLastUpdate = '0';}
 $totalHostsNo = count(array_unique($totalHostsArray));
 $c = array_count_values($totalHostsArray);
@@ -323,7 +323,7 @@ elseif ($ep == -3) {
 				<label for='newXMLFile'>$lang[39]</label>
 				<select id='content' name='newXMLFile' class='settings-select right-in-3'>
 	";
-	foreach (glob('*.{rss,xml}', GLOB_BRACE) as $filename) {
+	foreach (glob('feed/*.xml') as $filename) {
 		if ($xmlFileName == $filename) {
 			$settingsContent .= "<option selected='selected' value='$filename'>$filename</option>";
 		}
@@ -340,7 +340,7 @@ elseif ($ep == -3) {
 				<select id='language' name='newLanguage' class='settings-select right-in-6'>
 
 	";
-	foreach (glob('language/*.php', GLOB_BRACE) as $languageFile) {
+	foreach (glob('language/*.php') as $languageFile) {
 		$pathParts = pathinfo($languageFile);
 		$languageName = $pathParts['filename'];
 		if ($language == $languageFile) {
